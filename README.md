@@ -14,7 +14,7 @@
 =============================================================
 ```
 ---
-![badge](https://img.shields.io/badge/Sman-%20%3E__ v.0.1dev-blue)
+![badge](https://img.shields.io/badge/Sman-%20%3E__-blue)
 ![Dep](https://img.shields.io/badge/dependencies-none-brightgreen)
 
 **Sman >_** is a commande line interpreter   for SamaneMVC  framework  
