@@ -9,6 +9,18 @@
 #include "sm.h"
 
 
+
+std::string stylish  ( int fs   ,  int fc , int bc  ) {
+	 std::string  font_style  =  std::to_string(fs) ; 
+ 	 if  (fc  != 0x00) 
+		return  CPRE +  font_style + ";" +std::to_string(fc)+ "m";
+ 	 if (  bc != 0x00)
+         return CPRE +  font_style + ";" + std::to_string(bc) + "m" ;  
+     if  (bc != 0x000  &&  fc != 0x000)  
+         return CPRE +  font_style + ";" + std::to_string(fc) + ";" + std::to_string(bc) + "m" ;  
+}
+
+
 static  void  is_file_exist ( std::string  const &file_stream ) 
 {
       std::ifstream  _if(file_stream) ; 
@@ -33,7 +45,7 @@ void  templates_base_file  (void)  {
         T_MODELS_FILE
     }  ; 
 
-   for(auto & each_file  : under_templates_file  ) 
+   for(auto const& each_file  : under_templates_file  ) 
    {
         std::string  relative_path = TEMPLATE_PATH  + each_file  ; 
         is_file_exist(relative_path)  ;
