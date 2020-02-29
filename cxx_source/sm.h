@@ -12,6 +12,7 @@
 #define  T_ENTITIES_FILE  "entities/Test.php"
 #define  T_MODELS_FILE    "models/TestDB.php"
 
+#define  H_CACHE          ".sman_session"
 //! colors 
 #define   CPRE			 "\033["  			 //!  prefixed colors  
 #define   DEFC     		 "\033[0m" 			 //!  default  end color  
@@ -57,13 +58,7 @@ std::string stylish (int ,int fc=0, int bc=0) ;
  * check if  the util file existe in the project directories  
  * however it  quick  when  on folder is missing or empty
  */
-static  void  is_file_exist(std::basic_string<char> const & ) ; 
+auto  is_file_exist(std::basic_string<char> const & )  -> void  ; 
 
-
-/*!
- * catch  the inside the template folder 
- */
-
-void templates_base_file(void) ; 
 
 #endif 
