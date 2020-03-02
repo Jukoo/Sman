@@ -9,6 +9,7 @@ const
 { _global}      = lib,
 {log}           =console,
 {f_stream, Sys} = node_n,
+{colors:{fs ,fc,bc,paint}} =_global , 
 subDir = [
      conf_dir_location  
     ,ctlr_dir_location  
@@ -52,8 +53,7 @@ process.argv[0x00] = {
                          for (const _sb of  subDir)
                          {  
                              const [dir,file]  = DF_spread(_sb)
-                             log (`checking subdir  ${dir} -> ${file}`) 
-                             //[] don't forget to wrap it  
+                             log (`checking subdir  ${dir} -> ${file}`)
                              D_access(`${tmproot}${dir}` ,  OK => {
                                  if (OK) 
                                      f_stream.access(`${tmproot}${dir}/${file}` , f_stream.constants.F_OK  ,err =>{
@@ -73,7 +73,9 @@ process.argv[0x00] = {
                      ["@end_sub_stream"]  
                  })
 
-             }else  log('Everything is okay ')
+             }else paint(`Everything is ok`,fs.blink, fc.f_green) 
+            
+              
          })  
      }
 }
