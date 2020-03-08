@@ -19,7 +19,7 @@ subDir = [
 
 
 process.argv[0x00] = {
-     ["utils"]  : {
+     ["#utils"]  : {
          //~   seperate   the folders  and files   form current 
          //~   path  passed on arguments   
           DF_spread  :  path_ => [ _dir_  , _file_ ]  = path_.split("/") , 
@@ -36,7 +36,7 @@ process.argv[0x00] = {
      },  
      ["#check_template_dir"]  () {
          //~ import  utile  namespace  
-          const  { DF_spread  , D_access} = process.argv[0x000]["utils"]; 
+          const  { DF_spread  , D_access} = process.argv[0x000]["#utils"]; 
          //~  .sman_session   if  not  defined   crate  a new one 
          //~  that indicate the  projet is well initialized 
          f_stream.access(".sman_session"  ,  f_stream.constants["F_OK"] , err => {

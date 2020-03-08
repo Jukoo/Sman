@@ -1,10 +1,12 @@
 #if !defined(SAMANE_MVC)
 #define  SAMANE_MVC
-
+//!  UTILS  URLs 
 #define  BRANCH           "master" 
 #define  REPOS_OWNER      "ngorseckframework/samanemvc/"
 #define  SAMANE_ROOT_URL  "https://raw.githubusercontent.com/"
+//~---------------------
 
+//!  REQUIRED FILES 
 #define  TEMPLATE_PATH    "templates/"
 
 #define  T_CONF_FILE      "config/database.php"
@@ -13,10 +15,13 @@
 #define  T_MODELS_FILE    "models/TestDB.php"
 
 #define  H_CACHE          ".sman_session"
+//~----------------
+
+//~ COLORS  EMPHASE 
 //! colors 
 #define   CPRE			 "\033["  			 //!  prefixed colors  
 #define   DEFC     		 "\033[0m" 			 //!  default  end color  
-
+//~-----------------
 //! font style 
 #define  NORMAL    0x0
 #define  BOLD      0x1
@@ -27,7 +32,7 @@
 #define  REVERSE   0x7 
 #define  INVISIBLE 0x8
 #define  BARRED    0x9  
-
+//~------------------
 //! font colors  
 #define  F_BLACK   0x1e
 #define  F_RED     0x1f
@@ -37,8 +42,7 @@
 #define  F_MAGENTA 0x23
 #define  F_CYAN    0x24
 #define  F_WHITE   0x25
-
-
+//~-------------------
 //! background  colors  
 #define  B_BLACK   0x28
 #define  B_RED     0x29
@@ -48,11 +52,9 @@
 #define  B_MAGENTA 0x2d
 #define  B_CYAN    0x2e
 #define  B_WHITE   0x2f 
+//~--------------------
 
-
-
-
-std::string stylish (int ,int fc=0, int bc=0) ;
+std::__cxx11::string stylish (int ,int fc=0, int bc=0) ;
 
 /*!
  * check if  the util file existe in the project directories  
@@ -60,5 +62,12 @@ std::string stylish (int ,int fc=0, int bc=0) ;
  */
 auto  is_file_exist(std::basic_string<char> const & )  -> void  ; 
 
+
+auto create_stream ( std::basic_string<char>  const& src , std::basic_string<char> const&dest)-> void  ; 
+
+
+auto  arg_manager (std::vector<std::basic_string<char>>& , bool show) -> void ; 
+
+auto  arg_setup  ( std::vector<std::basic_string<char>> &  ,  int const & , char **)  -> void ; 
 
 #endif 

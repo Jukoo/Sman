@@ -2,23 +2,28 @@
 #include  <stdlib.h> 
 #include  <fstream>
 #include  <vector>
-
+#include  <string> 
+#include  <map>
 
 #include  "sm.h"
+using namespace  std::literals::string_literals ;  
 
 
-int main () {
-
+int  main (int argc  , char **argv ) {
+     
+     std::vector<std::string> arg_collection ;
+     arg_setup(arg_collection , argc , argv) ; 
+ 
     //~check the main template directory is  present in  projet 
-    
     //~ collection   of all the file  needed   
     std::vector<std::string> sub_dir  =  {
         T_CONF_FILE, 
         T_CTRL_FILE,
         T_ENTITIES_FILE, 
         T_MODELS_FILE
-    };  
-    
+    };
+
+
     int total_files =  sub_dir.size()  ; 
     int inspect_file  { 0x00 } ;   
     std::cout  <<  total_files << std::endl  ; 
@@ -39,7 +44,7 @@ int main () {
     if  (  total_files  == inspect_file  &&  !session_cache)  
     {
         std::cout  << stylish(NORMAL , F_GREEN) ; 
-        std::cout  << "[ OK ] ALL  is  done"  << DEFC << std::endl ;  
+        std::fprintf(stdout , "[ done ] Everything is Ok %s %c" , DEFC ,  0x00a ); 
         //~ creating  .hiden cahed file  
         std::ofstream create_session_cache(cache.c_str()) ; 
         if (create_session_cache) 
@@ -57,7 +62,6 @@ int main () {
     }
         
     
-
 
 
     return EXIT_SUCCESS ; 

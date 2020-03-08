@@ -1,7 +1,7 @@
 #!usr/bin/make 
 
 
-cxx  = g++ 
+cxx  = g++  -std=c++17  
 lcurl  = -lcurl  #argument  used for libcurl  
 cxxflags  = -Wall -Wextra  
 exec_with_curl_fetcher = sman_cf
@@ -14,23 +14,14 @@ all : $(exec)
 	
 sman.o  : sm.h
 
-
 $(exec) : $(obj) 
 	$(cxx)   -o $@ $^  $(cxxflags)
-
-
-
 
 $(exec_with_curl_fetcher) : $(obj) 
 	$(cxx)   -o $@ $^  $(cxxflags)  $(lcurl)
 
-
-	
-
 %.o  :  %.cc  
 	$(cxx) -o  $@  -c $<  $(cxxflags)
-
-
 
 .PHONY : clean  mproper
 

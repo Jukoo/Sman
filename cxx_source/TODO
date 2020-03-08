@@ -1,1 +1,3 @@
-[]  au lancement  on verifier si ya le dossier Templates et les  fichiers  w
+[]  download all file if template  folder is missing   using curl  api with  multithreading 
+[]  mains  stdargs  arguments used 
+[]  add suggestion  word   
