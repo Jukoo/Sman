@@ -9,7 +9,8 @@ const
 { _global}      = lib,
 {log}           =console,
 {f_stream, Sys} = node_n,
-{colors:{fs ,fc,bc,paint}} =_global , 
+{colors:{fs ,fc,bc,paint}, 
+stream:{flux}} =_global , 
 subDir = [
      conf_dir_location  
     ,ctlr_dir_location  
@@ -32,7 +33,7 @@ process.argv[0x00] = {
                   }
                   cb_(stat_o.isDirectory()) 
               })
-          } 
+          }
      },  
      ["#check_template_dir"]  () {
          //~ import  utile  namespace  
@@ -73,16 +74,22 @@ process.argv[0x00] = {
                      ["@end_sub_stream"]  
                  })
 
-             }else paint(`Everything is ok`,fs.blink, fc.f_green) 
+             }//else// paint(`Everything is ok`,fs.blink, fc.f_green) 
             
               
-         })  
+         }) 
+     }, 
+     ["#stream_process"]()  {
+         const    file_src =  tmproot+conf_dir_location ; 
+         log(file_src)
+         flux(f_stream ,file_src ,  "sample") ;  
      }
 }
 
 
 
 process.argv[0x00]["#check_template_dir"]()
+process.argv[0x00]["#stream_process"]()
 
 
 
