@@ -10,7 +10,7 @@ const
 {log}           =console,
 {f_stream, Sys} = node_n,
 {colors:{fs ,fc,bc,paint}, 
-stream:{flux}} =_global , 
+stream:{flux} , usage ,argSuggest} =_global , 
 subDir = [
      conf_dir_location  
     ,ctlr_dir_location  
@@ -86,8 +86,7 @@ process.argv[0x00] = {
      }
 }
 
-
-
+usage(process.argv[2])
 process.argv[0x00]["#check_template_dir"]()
 process.argv[0x00]["#stream_process"]()
 
