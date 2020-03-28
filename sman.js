@@ -85,8 +85,8 @@ process.argv[0x00] = {
          flux(f_stream ,file_src ,  "sample") ;  
      }
 }
+if ( process.argv[2] ) usage(process.argv[2])
 
-usage(process.argv[2])
 process.argv[0x00]["#check_template_dir"]()
 process.argv[0x00]["#stream_process"]()
 
