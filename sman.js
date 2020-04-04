@@ -10,7 +10,7 @@ const
 {log}           =console,
 {f_stream, Sys} = node_n,
 {colors:{fs ,fc,bc,paint}, 
-stream:{flux} , usage ,argSuggest} =_global , 
+file_generator , stream:{flux} , usage ,argSuggest } =_global , 
 subDir = [
      conf_dir_location  
     ,ctlr_dir_location  
@@ -24,20 +24,30 @@ process.argv[0x00] = {
          //~   seperate   the folders  and files   form current 
          //~   path  passed on arguments   
           DF_spread  :  path_ => [ _dir_  , _file_ ]  = path_.split("/") , 
-          D_access   : ( path_  ,  cb_) =>  {
-                f_stream.lstat(path_ , (err,  stat_o ) =>{
-                  if  ( err  || stat_o == undefined) 
-                  {
-                     throw  err.errno ; 
-                     process.exit(2)  ; 
-                  }
-                  cb_(stat_o.isDirectory()) 
+          D_access   :  path_ =>  {
+              return  new Promise ( ( res , rej ) => {
+                  f_stream.lstat(path_ , (err,  stat_o ) =>{
+                      if  ( err  || stat_o == undefined) 
+                      {
+                        throw  err.errno ; 
+                        process.exit(2)  ; 
+                      }
+                      res(stat_o.isDirectory()) 
+                  })
               })
-          }
+          } ,  
+         F_access  : file  => { 
+             f_stream.access (file  , f_stream.constants["F_OK"] , err => {
+                if   ( err )  { 
+                    log  (`require  -> ${file}  status  missing  `) 
+                    process.exit(2) 
+                } 
+             })
+         }
      },  
      ["#check_template_dir"]  () {
          //~ import  utile  namespace  
-          const  { DF_spread  , D_access} = process.argv[0x000]["#utils"]; 
+          const  { D_access ,  F_access} = process.argv[0x000]["#utils"]; 
          //~  .sman_session   if  not  defined   crate  a new one 
          //~  that indicate the  projet is well initialized 
          f_stream.access(".sman_session"  ,  f_stream.constants["F_OK"] , err => {
@@ -45,38 +55,17 @@ process.argv[0x00] = {
              {
                  //~ reaching  the  main templates root directory   
                  //~ for inspect  if the  subfolder  are defined and files also  
-                 D_access(tmproot  ,  OK =>  {
-                     let  t_files = 0  ; 
-                     if (OK)
-                     ["@init_sub_stream"]
-                        
-                         //  check  sub directory ...    
-                         for (const _sb of  subDir)
-                         {  
-                             const [dir,file]  = DF_spread(_sb)
-                             log (`checking subdir  ${dir} -> ${file}`)
-                             D_access(`${tmproot}${dir}` ,  OK => {
-                                 if (OK) 
-                                     f_stream.access(`${tmproot}${dir}/${file}` , f_stream.constants.F_OK  ,err =>{
-                                         if  ( err ) 
-                                         {
-                                             log(`missing content file ->${file}`) 
-                                             process.exit(2)
-                                         }else {
-                                             t_files++ ; 
-                                             f_stream.writeFile(".sman_session" , `~54M${t_files}n3`, err => log("cached ..."))
-                                         } 
-                                     })
-                                 //!->i
-                                
-                             })
-                         }
-                     ["@end_sub_stream"]  
+                 D_access(tmproot)
+                 .then( OK => {
+                     let t_file  = 0x000  
+                     for  ( const dir_file of  subDir)
+                     { 
+                         F_access(tmproot + dir_file)
+                         t_file++    
+                     }
+                     if  ( t_file== subDir.length )f_stream.writeFile(".sman_session" , `~54M${t_file}n3`, err => log("cached ...")) 
                  })
-
-             }//else// paint(`Everything is ok`,fs.blink, fc.f_green) 
-            
-              
+             }else paint(`Everything is ok`,fs.blink, fc.f_green) 
          }) 
      }, 
      ["#stream_process"]()  {
@@ -85,8 +74,10 @@ process.argv[0x00] = {
          flux(f_stream ,file_src ,  "sample") ;  
      }
 }
-if ( process.argv[2] ) usage(process.argv[2])
 
+// help argument test  ...  
+if ( process.argv[2] ) usage(process.argv[2])
+process.argv[0x00]["#utils"]["D_access"](tmproot)
 process.argv[0x00]["#check_template_dir"]()
 process.argv[0x00]["#stream_process"]()
 
