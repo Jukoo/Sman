@@ -9,8 +9,12 @@ module
        _global  : require("./lib/__Global__")
     },  
     ["@node_native_modules"] :  {
-      f_stream : require("fs"),
-      Sys      : require("os"), 
-      path     : require("path")
-    }
+        f_stream : require("fs"),
+        Sys      : require("os"), 
+        path     : require("path"),
+        ch_proc  : require("child_process")
+    },
+	["@samane"] : {
+		repository  : "https://raw.githubusercontent.com/ngorseckframework/samanemvc/master/"
+	}
 }
