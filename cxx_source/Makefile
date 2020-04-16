@@ -3,22 +3,24 @@
 
 cxx  = g++  -std=c++17  
 lcurl  = -lcurl  #argument  used for libcurl  
-cxxflags  = -Wall -Wextra  
-exec_with_curl_fetcher = sman_cf
-exec  = ../sman   # compile in default   
+cxxflags  = -Wall -Wextra  -pedantic  
+#exec_with_curl_fetcher = sman_cf  #  not yet implemented  
+exec  = ../sman     
 src  = $(wildcard *.cc) 
+header_inc= $(wildcard *.h)
 obj  = $(src:.cc=.o)
 
 
 all : $(exec)
 	
-sman.o  : sm.h
+sman.o  :$(header_inc)  
 
 $(exec) : $(obj) 
 	$(cxx)   -o $@ $^  $(cxxflags)
 
-$(exec_with_curl_fetcher) : $(obj) 
-	$(cxx)   -o $@ $^  $(cxxflags)  $(lcurl)
+#[  not yet implemented   because it use   curl lib  
+#$(exec_with_curl_fetcher) : $(obj) 
+#	$(cxx)   -o $@ $^  $(cxxflags)  $(lcurl)
 
 %.o  :  %.cc  
 	$(cxx) -o  $@  -c $<  $(cxxflags)
@@ -26,9 +28,9 @@ $(exec_with_curl_fetcher) : $(obj)
 .PHONY : clean  mproper
 
 clean  : 
-	rm *.o
+	rm -rf *.o
 
 mproper  : clean 
-	rm  $(exec) $(exec_with_curl_fetcher)
+	rm  -rf $(exec) #$(exec_with_curl_fetcher)
 
 
